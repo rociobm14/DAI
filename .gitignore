@@ -3,3 +3,6 @@ data/
 
 #Ignore __pycache__ directory
 __pycache__/
+
+#Ignore db.sqlite3
+db.sqlite3
