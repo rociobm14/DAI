@@ -1,6 +1,4 @@
 from django.db import models
-
-# Create your models here.
 from pydantic import BaseModel, FilePath, Field, EmailStr, field_serializer, field_validator
 from pymongo import MongoClient
 from pprint import pprint
