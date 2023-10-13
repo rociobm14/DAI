@@ -1,4 +1,4 @@
-from pydantic import BaseModel, FilePath, Field, EmailStr, field_serializer, field_validator
+from pydantic import FilePath
 from pymongo import MongoClient
 from pprint import pprint
 from datetime import datetime
