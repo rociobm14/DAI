@@ -4,10 +4,10 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("C1/", views.C1, name="C1"),
-    path("C2/", views.C2, name="C2"),
-    path("C3/", views.C3, name="C3"),
-    path("C4/", views.C4, name="C4"),
-    path("C5/", views.C5, name="C5"),
-    path("C6/", views.C6, name="C6"),
+    path("Query1/", views.Query1, name="Query1"),
+    path("Query2/", views.Query2, name="Query2"),
+    path("Query3/", views.Query3, name="Query3"),
+    path("Query4/", views.Query4, name="Query4"),
+    path("Query5/", views.Query5, name="Query5"),
+    path("Query6/", views.Query6, name="Query6"),
 ]
