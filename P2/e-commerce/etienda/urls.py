@@ -11,3 +11,4 @@ urlpatterns = [
     path("Query5/", views.Query5, name="Query5"),
     path("Query6/", views.Query6, name="Query6"),
 ]
+
