@@ -5,8 +5,8 @@ from .queries import query1, query2, query3, query4, query5, query6, productos_c
 # Create your views here
 
 def index(request):
-    context={}
-    return render(request, 'etienda/index.html', context)
+    return render(request, 'etienda/index.html')
+
 
 def Query1(request):
     salida = query1(productos_collection)
