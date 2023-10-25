@@ -1,5 +1,9 @@
-<body>
-    <h1>Práctica 2 DAI: Django Framework</h1>
+<!--index.html 
+    página principal de la web(landing page)
+    heredará de base.html el menú de navegación-->
+{% extends 'etienda/base.html' %}
+{% block content %}
+<h1>Práctica 2 DAI: Django Framework</h1>
     <ol>
         <li> <a href="Query1/">Consulta 1: Electrónica entre 100 y 200€, ordenados por precio</a> </li>
         <li> <a href="Query2/">Consulta 2: Productos que contengan la palabra 'pocket' en la descripción</a> </li>
@@ -8,4 +12,5 @@
         <li> <a href="Query5/">Consulta 5: Facturación total</a> </li>
         <li> <a href="Query6/">Consulta 6: Facturación por categoría de producto</a> </li>
     </ol>
-</body>
+{% endblock %}
+
