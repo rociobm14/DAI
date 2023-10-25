@@ -6,15 +6,11 @@ from datetime import datetime
 from typing import Any
 import requests, pathlib
 
-# https://requests.readthedocs.io/en/latest/
 def getProductos(api):
 	response = requests.get(api)
 	return response.json()
 				
 # Esquema de la BD
-# https://docs.pydantic.dev/latest/
-# con anotaciones de tipo https://docs.python.org/3/library/typing.html
-# https://docs.pydantic.dev/latest/usage/fields/
 
 class Nota(BaseModel):
 	puntuación: float = Field(ge=0., lt=5.)

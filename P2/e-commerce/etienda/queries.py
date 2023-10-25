@@ -102,6 +102,7 @@ def query1(productos_collection):
         
     return electronica_ordenada
 
+
 def query2(productos_collection):
     
     consulta2 = {
@@ -117,6 +118,7 @@ def query2(productos_collection):
 
     return productos_pocket
 
+
 def query3(productos_collection):
 
     consulta3 = {
@@ -131,6 +133,7 @@ def query3(productos_collection):
 
     return productos_mayor_4
 
+
 def query4(productos_collection):
 
     consulta4 = {
@@ -144,6 +147,7 @@ def query4(productos_collection):
         ropa_hombre_ordenada+=f"{producto}\n\n"
 
     return ropa_hombre_ordenada
+
 
 def query5(productos_collection, compras_collection):
 
@@ -166,6 +170,7 @@ def query5(productos_collection, compras_collection):
     facturacion_total = f"La facturación total es {round(facturacion_total,2)}\n"
 
     return facturacion_total
+
 
 def query6(productos_collection, compras_collection):
 
