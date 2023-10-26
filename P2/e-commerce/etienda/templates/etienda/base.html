@@ -21,10 +21,9 @@
                         Categories
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Men´s clothing</a></li>
-                      <li><a class="dropdown-item" href="#">Women´s clothing</a></li>
-                      <li><a class="dropdown-item" href="#">Jewelery</a></li>
-                      <li><a class="dropdown-item" href="#">Electronics</a></li>
+                        {%for cat in categories%}
+                            <li><a class="dropdown-item" href="{% url 'categories' categories=cat %}">{{cat}}</a></li>
+                        {%endfor%}
                 </div>
             </div>
         </nav>

@@ -3,14 +3,32 @@
     heredará de base.html el menú de navegación-->
 {% extends 'etienda/base.html' %}
 {% block content %}
-<h1>Práctica 2 DAI: Django Framework</h1>
-    <ol>
-        <li> <a href="Query1/">Consulta 1: Electrónica entre 100 y 200€, ordenados por precio</a> </li>
-        <li> <a href="Query2/">Consulta 2: Productos que contengan la palabra 'pocket' en la descripción</a> </li>
-        <li> <a href="Query3/">Consulta 3: Productos con puntuación mayor de 4</a> </li>
-        <li> <a href="Query4/">Consulta 4:Ropa de hombre, ordenada por puntuación </a> </li>
-        <li> <a href="Query5/">Consulta 5: Facturación total</a> </li>
-        <li> <a href="Query6/">Consulta 6: Facturación por categoría de producto</a> </li>
-    </ol>
+<div class="container text-center">
+    <div class="row align-items-start" style="margin-top: 60px";>
+        {% for p in products %}
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="p.image" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.nombre}}</h5>
+                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#description{{p.id}}" aria-expanded="false" aria-controls="description{{p.id}}"
+                        style="background-color: #9370DB">
+                                Description
+                        </button>
+                        <div class="collapse" id="description{{p.id}}">
+                            <p class="card-text">{{p.descripción}}</p>
+                        </div>
+
+                        <div class="container" style="margin-top: 20px";>
+                            <p class="card-text">{{p.precio}}$</p>
+                            <a href="#" class="btn btn-primary">Buy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
 

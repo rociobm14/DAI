@@ -83,7 +83,16 @@ for c in compras:
 	compras_collection.insert_one(compra.model_dump())
 
 	user_counter += 1
+ 
+#FUNCTIONS
+
+def GetCategories(productos_collection):
+    categories=[]
+    for p in productos_collection.find():
+        if p["categoría"] not in categories:
+            categories.append(p["categoría"])
 	
+    return categories
 
 #CONSULTAS
 

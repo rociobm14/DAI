@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .queries import query1, query2, query3, query4, query5, query6, productos_collection, compras_collection
+from .queries import query1, query2, query3, query4, query5, query6, productos_collection, compras_collection, GetCategories
 
 # Create your views here
 
 def index(request):
-    return render(request, 'etienda/index.html')
+    context = {'products': productos_collection.find(), 'categories': GetCategories(productos_collection)}
+    return render(request, 'etienda/index.html', context)
 
+def categories(request):
+    context = {'categories': GetCategories(productos_collection)}
+    return render(request, 'etienda/categories.html', context)
 
 def Query1(request):
     salida = query1(productos_collection)
