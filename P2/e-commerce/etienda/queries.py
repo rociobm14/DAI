@@ -94,6 +94,10 @@ def GetCategories(productos_collection):
 	
     return categories
 
+def getProductsByCategory(productos_collection, category):
+    products = productos_collection.find({"categoría": category})
+    return products
+    
 #CONSULTAS
 
 def query1(productos_collection):
