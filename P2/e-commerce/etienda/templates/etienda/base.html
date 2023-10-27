@@ -22,7 +22,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         {%for cat in categories%}
-                            <li><a class="dropdown-item" href="{% url 'categories' categories=cat %}">{{cat}}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category' category=cat %}">{{cat}}</a></li>
                         {%endfor%}
                 </div>
             </div>
