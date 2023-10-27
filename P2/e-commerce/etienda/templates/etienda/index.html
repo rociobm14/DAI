@@ -7,16 +7,16 @@
     <div class="row align-items-start" style="margin-top: 60px";>
         {% for p in products %}
             <div class="col-md-4 mb-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="/{{p.imágen}}" class="card-img-top" alt="...">
-                    <div class="card-body">
+                <div class="card" >
+                    <img src="/{{p.imágen}}" class="card-img-top" style="width:400px;height:400px;" alt="...">
+                    <div class="card-body" style="width:400px;">
                         <h5 class="card-title">{{p.nombre}}</h5>
                         <button class="btn btn-dark" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#description{{p.id}}" aria-expanded="false" aria-controls="description{{p.id}}"
+                        data-bs-target="#description{{p.id_producto}}" aria-expanded="false" aria-controls="description{{p.id_producto}}"
                         style="background-color: #9370DB">
                                 Description
                         </button>
-                        <div class="collapse" id="description{{p.id}}">
+                        <div class="collapse" id="description{{p.id_producto}}">
                             <p class="card-text">{{p.descripción}}</p>
                         </div>
 
