@@ -94,6 +94,18 @@ def GetCategories(productos_collection):
 	
     return categories
 
+def SearchProducts(productos_collection, to_find):
+    query = {
+        "$or": [
+            {"nombre": {"$regex":to_find, "$options": "i"}},
+            {"descripción": {"$regex":to_find, "$options": "i"}}   
+        ]
+    }
+    
+    products = productos_collection.find(query)
+    return products
+    
+
 def getProductsByCategory(productos_collection, category):
     products = productos_collection.find({"categoría": category})
     return products
