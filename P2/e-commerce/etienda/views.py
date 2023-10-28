@@ -11,6 +11,7 @@ def search(request):
     context = {'search': request.GET.get('to_find', ''), 
                'products': SearchProducts(productos_collection, request.GET.get('to_find', '')),
                'categories': GetCategories(productos_collection)}
+    
     return render(request, 'etienda/search.html', context)
 
 def category(request,category):
