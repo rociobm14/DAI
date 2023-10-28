@@ -97,8 +97,8 @@ def GetCategories(productos_collection):
 def SearchProducts(productos_collection, to_find):
     query = {
         "$or": [
-            {"nombre": {"$regex":to_find, "$options": "i"}},
-            {"descripción": {"$regex":to_find, "$options": "i"}}   
+            {"nombre": {"$regex":f"\\b{to_find}\\b", "$options": "i"}},
+            {"descripción": {"$regex":f"\\b{to_find}\\b", "$options": "i"}}   
         ]
     }
     
