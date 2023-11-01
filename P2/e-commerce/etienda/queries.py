@@ -109,6 +109,10 @@ def SearchProducts(productos_collection, to_find):
 def getProductsByCategory(productos_collection, category):
     products = productos_collection.find({"categoría": category})
     return products
+
+def getLastProductID(productos_collection):
+    lastID = productos_collection.find_one(sort=[("id_producto", -1)])
+    return lastID["id_producto"]
     
 #CONSULTAS
 
