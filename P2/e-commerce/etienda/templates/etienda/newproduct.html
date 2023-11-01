@@ -1,0 +1,15 @@
+<!--mensclothing.html 
+    página principal de la web(landing page)
+    heredará de base.html el menú de navegación-->
+{% extends 'etienda/base.html' %}
+{% block content %}
+
+<h1> ID {{id}} </h1>
+<form action="{% url 'newproduct' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_div }}
+	<button type="submit">Añadir</button>
+</form>
+    
+    
+{% endblock %}
