@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .queries import query1, query2, query3, query4, query5, query6, productos_collection, compras_collection, GetCategories, getProductsByCategory, SearchProducts, getLastProductID
+from .queries import productos_collection, GetCategories, getProductsByCategory, SearchProducts, getLastProductID
 from .forms import ProductoForm
 from .models import Producto
-from pydantic import FilePath
 
 def index(request):
     context = {'products': productos_collection.find(),
