@@ -14,6 +14,9 @@ tienda_db = client.tienda                   # Base de Datos de la tienda
 
 productos_collection = tienda_db.productos  # Colección de los productos
 
+#productos_collection.delete_one({ "nombre": "Rocio" })
+
+
 #Obtiene productos de la API
 #productos = getProductos('https://fakestoreapi.com/products')
 
