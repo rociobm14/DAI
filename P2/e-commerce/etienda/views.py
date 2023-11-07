@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .queries import productos_collection, GetCategories, getProductsByCategory, SearchProducts, getLastProductID
 from .forms import ProductoForm
 from .models import Producto
+from django.contrib import messages
 
 def index(request):
     context = {'products': productos_collection.find(),
@@ -42,8 +43,14 @@ def newproduct(request):
             
             #Inserta el producto en la BD
             productos_collection.insert_one(product.model_dump())
-            
+            messages.success(request, 'Product added successfully')
             return redirect('index')
+        
+        else:
+            for errors in form.errors.values():
+                for error in errors:
+                    messages.error(request, error)
+            return redirect('newproduct')
         
     context = {'id': getLastProductID(productos_collection),
                'form': form,
