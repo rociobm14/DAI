@@ -173,3 +173,6 @@ LOGGING = {
 			}
 		}
 	}
+
+LOGIN_REDIRECT_URL = "/etienda"
+LOGOUT_REDIRECT_URL = "/etienda"
