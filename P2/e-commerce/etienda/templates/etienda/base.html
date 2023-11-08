@@ -11,6 +11,13 @@
         <nav class="navbar navbar-expand-lg" style= "background-color: #9370DB">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'index' %}">Store</a>
+                {% if user.is_authenticated %}
+                    Hi {{ user.username }}!
+                    <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'logout' %}">Logout</a>
+                {% else %}
+                    <p>You are not logged in</p>
+                    <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'login' %}">Login</a>
+                {% endif %}   
                 <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'newproduct' %}">Add product</a>
                 <form class="d-flex" role="search" action="{% url 'search' %}">
                     <input class="form-control me-2" name = "to_find" type="search" placeholder="Search" aria-label="Search">
