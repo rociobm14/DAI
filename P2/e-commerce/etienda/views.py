@@ -4,6 +4,9 @@ from .queries import productos_collection, GetCategories, getProductsByCategory,
 from .forms import ProductoForm
 from .models import Producto
 from django.contrib import messages
+import logging
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     context = {'products': productos_collection.find(),
@@ -43,10 +46,12 @@ def newproduct(request):
             
             #Inserta el producto en la BD
             productos_collection.insert_one(product.model_dump())
-            messages.success(request, 'Product added successfully')
+            logger.info("Product added successfully")
+            messages.success(request, 'Product added successfully!')
             return redirect('index')
         
         else:
+            logger.error("There was an error adding product, please try again")
             for errors in form.errors.values():
                 for error in errors:
                     messages.error(request, error)
