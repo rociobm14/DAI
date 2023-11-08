@@ -5,6 +5,7 @@ from .forms import ProductoForm
 from .models import Producto
 from django.contrib import messages
 import logging
+from django.contrib.auth.decorators import login_required
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +27,7 @@ def category(request,category):
                'category': category}
     return render(request, 'etienda/category.html', context)
 
+@login_required
 def newproduct(request):
     form = ProductoForm()
     if request.method == 'POST':
