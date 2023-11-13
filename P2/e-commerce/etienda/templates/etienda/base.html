@@ -8,33 +8,55 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg" style= "background-color: #9370DB">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'index' %}">Store</a>
-                {% if user.is_authenticated %}
-                    Hi {{ user.username }}!
-                    <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'logout' %}">Logout</a>
-                {% else %}
-                    <p>You are not logged in</p>
-                    <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'login' %}">Login</a>
-                {% endif %}   
-                <a class="navbar-brand fw-bold" style= "color: #F5F5DC" href="{%url 'newproduct' %}">Add product</a>
-                <form class="d-flex" role="search" action="{% url 'search' %}">
-                    <input class="form-control me-2" name = "to_find" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn btn-success" type="submit">Search</button>
-                </form>
-                <div class="dropdown">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #9370DB">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="{% url 'index' %}">Store</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="{%url 'newproduct' %}">Add product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="{%url 'logout' %}">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link">Hi {{ user.username }}!</span>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" href="{%url 'login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link">You're not logged in!</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+        
+                <div class="nav-item mx-auto ">
+                    <form class="d-flex" role="search" action="{% url 'search' %}">
+                        <input class="form-control me-2" name="to_find" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+        
+                <div class="nav-item dropdown ms-5">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </button>
                     <ul class="dropdown-menu">
-                        {%for cat in categories%}
+                        {% for cat in categories %}
                             <li><a class="dropdown-item" href="{% url 'category' category=cat %}">{{cat}}</a></li>
-                        {%endfor%}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
         </nav>
+        
         <div class="container">
             {% block content %}
             {% endblock %}
