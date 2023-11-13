@@ -54,11 +54,4 @@ class Compra(BaseModel):
 	productos: list	
  
  
-# Conexión con la BD				
-# https://pymongo.readthedocs.io/en/stable/tutorial.html
-# client = MongoClient('mongo', 27017)
-
-# tienda_db = client.tienda                   # Base de Datos de la tienda
-
-# productos_collection = tienda_db.productos  # Colección de los productos
 

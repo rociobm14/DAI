@@ -14,80 +14,9 @@ tienda_db = client.tienda                   # Base de Datos de la tienda
 
 productos_collection = tienda_db.productos  # Colección de los productos
 
-#productos_collection.delete_one({ "nombre": "Rocio" })
+productos_collection.delete_one({ "nombre": "Rocio" })
 
-
-#Obtiene productos de la API
-#productos = getProductos('https://fakestoreapi.com/products')
-
-#Borra la colección de productos para que no se reinserten los mismos
-#productos_collection.drop()
-
-#Inserto los productos de la API en la colección de productos
-# for p in productos:
-
-# 	#Se descarga la imagen del producto
-# 	url = p["image"]
-
-# 	directorio_destino = "imagenes/"
-
-# 	#Obtiene el nombre original de la imagen
-# 	nombre_archivo = os.path.basename(url)
-
-# 	#Crea la ruta del archivo
-# 	ruta_archivo_destino = os.path.join(directorio_destino, nombre_archivo)
-
-# 	response = requests.get(url)
-
-# 	#Guarda la imagen en el directorio
-# 	with open(ruta_archivo_destino, "wb") as archivo:
-# 		archivo.write(response.content)
-
-# 	#Instancia el producto conforme a la clase Producto
-# 	product = {
-# 		'id_producto': p["id"],
-# 		'nombre': p["title"],
-# 		'precio': p["price"],
-# 		'descripción': p["description"],
-# 		'categoría': p["category"],
-# 		'imágen': FilePath("imagenes/" + nombre_archivo),
-# 		'rating': {'puntuación': p["rating"]["rate"], 'cuenta': p["rating"]["count"]}
-# 	}
-
-# 	prod = Producto(**product)
-	
-# 	#Inserta el producto en la colección de productos
-# 	productos_collection.insert_one(prod.model_dump()) 		
-
-
-# compras_collection = tienda_db.compras  # Colección de las compras realizadas
-
-# #Obtiene las compras de la API
-# compras = getProductos('https://fakestoreapi.com/carts')
-
-# #Obtiene los usuarios de la API
-# usuarios = getProductos('https://fakestoreapi.com/users')
-
-# #Borra la colección de compras para que no se reinserten las mismas
-# compras_collection.drop()
-
-# #Establezco un contador para ir insertando los usuarios en las compras
-# user_counter = 0
-# for c in compras:
-# 	comp = {
-# 		'usuario': usuarios[user_counter]["email"],
-# 		'fecha': datetime.now(),
-# 		'productos': c["products"],
-# 	}
-
-# 	compra = Compra(**comp)
-
-# 	#Inserta la compra en la colección de compras
-# 	compras_collection.insert_one(compra.model_dump())
-
-# 	user_counter += 1
- 
-#FUNCTIONS
+#Functions
 
 def GetCategories(productos_collection):
     categories=[]
@@ -117,7 +46,9 @@ def getLastProductID(productos_collection):
     lastID = productos_collection.find_one(sort=[("id_producto", -1)])
     return lastID["id_producto"]
     
-#CONSULTAS
+
+
+#Queries
 
 def query1(productos_collection):
 
