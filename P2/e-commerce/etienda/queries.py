@@ -1,10 +1,4 @@
-from pydantic import FilePath
 from pymongo import MongoClient
-from pprint import pprint
-from datetime import datetime
-from typing import Any
-import requests, os
-from .models import Nota, Producto, Compra, getProductos
 
 # Conexión con la BD				
 # https://pymongo.readthedocs.io/en/stable/tutorial.html
@@ -14,7 +8,7 @@ tienda_db = client.tienda                   # Base de Datos de la tienda
 
 productos_collection = tienda_db.productos  # Colección de los productos
 
-productos_collection.delete_one({ "nombre": "Rocio" })
+productos_collection.delete_one({ "nombre": "Gaming Pc" })
 
 #Functions
 

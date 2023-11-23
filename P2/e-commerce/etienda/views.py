@@ -6,6 +6,7 @@ from .models import Producto
 from django.contrib import messages
 import logging
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 logger = logging.getLogger(__name__)
 
@@ -24,10 +25,12 @@ def search(request):
 def category(request,category):
     context = {'products': getProductsByCategory(productos_collection, category), 
                'categories': GetCategories(productos_collection), 
-               'category': category}
+               'category': category,
+               'current_category': category}
     return render(request, 'etienda/category.html', context)
 
 @login_required
+@staff_member_required
 def newproduct(request):
     form = ProductoForm()
     if request.method == 'POST':
