@@ -1,4 +1,5 @@
 data/
 __pycache__/
+imagenes/
 db.sqlite3
 Server.log
