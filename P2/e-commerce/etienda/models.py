@@ -1,5 +1,5 @@
 from django.db import models
-from pydantic import BaseModel, FilePath, Field, EmailStr, field_serializer, field_validator
+from pydantic import BaseModel, FilePath, Field, EmailStr, validator
 from pymongo import MongoClient
 from pprint import pprint
 from datetime import datetime
@@ -24,17 +24,11 @@ class Producto(BaseModel):
 	precio: float
 	descripción: str
 	categoría: str
-	imágen: FilePath | None
+	imágen: str | None
 	rating: Nota
-
-	@field_serializer('imágen')
-	def serializaPath(self, val) -> str:
-		if type(val) is pathlib.PosixPath:
-			return str(val)
-		return val	
 	
 	#Valida que el nombre empiece por mayúscula
-	@field_validator('nombre')
+	@validator('nombre')
 	@classmethod
 	def empieza_con_mayuscula(cls, v) -> str:
 		if not v[0].isupper():

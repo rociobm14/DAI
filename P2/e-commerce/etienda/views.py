@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 def index(request):
     context = {'products': productos_collection.find(),
                'categories': GetCategories(productos_collection)}
+    num_products = productos_collection.count_documents({})
+    logger.info(f"There are {num_products} products in the collection.")
     return render(request, 'etienda/index.html', context)
 
 def search(request):
@@ -50,7 +52,7 @@ def newproduct(request):
             product = Producto(**p)
             
             #Inserta el producto en la BD
-            productos_collection.insert_one(product.model_dump())
+            productos_collection.insert_one(product.dict())
             logger.info("Product added successfully")
             messages.success(request, 'Product added successfully!')
             return redirect('index')
