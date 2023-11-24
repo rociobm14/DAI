@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from .models import Producto
+from bson.objectid import ObjectId
 
 import logging
 logger = logging.getLogger(__name__)
@@ -43,39 +44,80 @@ def getLastProductID(productos_collection):
     return lastID["id_producto"]
     
 #API
-# def get_products():
-#     products = productos_collection.find()
-#     result = []
-#     for p in products:
-#         p["id"] = str(p.get("_id"))
-#         del p["_id"]
-#         p["title"] = p.get("nombre")
-#         p["price"] = p.get("precio")
-#         p["description"] = p.get("descripción")  
-#         p["category"] = p.get("categoría") 
-#         p["rating"] = {"rate": p["rating"]["puntuación"], "count": p["rating"]["cuenta"]} 
+def get_products():
+    products = productos_collection.find()
+    result = []
+    for p in products:
+        p["id"] = str(p.get("_id"))
+        del p["_id"]
+        p["title"] = p.get("nombre")
+        p["price"] = p.get("precio")
+        p["description"] = p.get("descripción")  
+        p["category"] = p.get("categoría") 
+        p["rating"] = {"rate": p["rating"]["puntuación"], "count": p["rating"]["cuenta"]} 
         
-#         result.append(p)
-#     return result
+        result.append(p)
+    return result
 
-# def create_product(producto):
-#     try:
-#         p = {
-#             'id_producto': getLastProductID(productos_collection),
-#             'nombre': producto.title,
-#             'precio': producto.price,
-#             'descripción': producto.description,
-#             #'categoría': producto.category,
-#             'rating': {'puntuación': producto.rating.rate, 'cuenta': producto.rating.count}
-#         }
+def create_product(producto):
+    try:
+        p = {
+            'id_producto': getLastProductID(productos_collection)+1,
+            'nombre': producto.title,
+            'precio': producto.price,
+            'descripción': producto.description,
+            'categoría': producto.category,
+            'imágen': "image",
+            'rating': {'puntuación': producto.rating.rate, 'cuenta': producto.rating.count}
+        }
         
-#         product = Producto(**p)
-#         productos_collection.insert_one(product.dict())
-#         get_products()
+        product = Producto(**p)
+        productos_collection.insert_one(product.dict())
     
-#     except Exception as e:
-#         logger.error(e)
-#         logger.info("the product could not be created")
+    except Exception as e:
+        logger.error(e)
+        logger.info("the product could not be created")
+        
+def get_product_by_id(id):
+    try:
+        product = productos_collection.find_one({'_id': ObjectId(id)})
+        product["id"] = str(product.get("_id"))
+        del product["_id"]
+        product["title"] = product.get("nombre")
+        product["price"] = product.get("precio")
+        product["description"] = product.get("descripción")  
+        product["category"] = product.get("categoría") 
+        product["rating"] = {"rate": product["rating"]["puntuación"], "count": product["rating"]["cuenta"]}
+        return product
+    
+    except Exception as e:
+        logger.info("The product could not be found")
+
+def modify_product_by_id(id, new_prod):
+    try:
+        productos_collection.update_one(
+            {"_id": ObjectId(id)}, 
+            {"$set": 
+                {"nombre": new_prod.title, 
+                 "precio": new_prod.price, 
+                 "descripción": new_prod.description, 
+                 "categoría": new_prod.category,
+                 'rating': {'puntuación': new_prod.rating.rate, 'cuenta': new_prod.rating.count}
+                 }})
+
+        return get_product_by_id(id)
+    
+    except Exception as e:
+        logger.info("The product could not be updated")
+        
+def delete_product_by_id(id):
+    try:
+        productos_collection.delete_one({'_id': ObjectId(id)})
+        
+    except Exception as e:
+        logger.info("The product has been deleted succesfully")
+        
+        
     
 
 #Queries
