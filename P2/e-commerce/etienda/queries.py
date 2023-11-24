@@ -1,4 +1,8 @@
 from pymongo import MongoClient
+from .models import Producto
+
+import logging
+logger = logging.getLogger(__name__)
 
 # Conexión con la BD				
 # https://pymongo.readthedocs.io/en/stable/tutorial.html
@@ -38,7 +42,6 @@ def getLastProductID(productos_collection):
     lastID = productos_collection.find_one(sort=[("id_producto", -1)])
     return lastID["id_producto"]
     
-
 
 #Queries
 
