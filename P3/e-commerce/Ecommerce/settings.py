@@ -124,7 +124,10 @@ STATIC_URL = 'imagenes/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'imagenes/')]
+STATICFILES_DIRS = [
+    BASE_DIR / "etienda/static",
+    BASE_DIR / "imagenes",
+]
 
 LOG_FILE = 'Server.log'
 
