@@ -92,6 +92,20 @@ def get_product_by_id(id):
     
     except Exception as e:
         logger.info("The product could not be found")
+        
+def product_by_id(id):
+    try:
+        product = productos_collection.find_one({'id_producto': id})
+        product["id"] = str(product.get("id_producto"))
+        product["title"] = product.get("nombre")
+        product["price"] = product.get("precio")
+        product["description"] = product.get("descripción")  
+        product["category"] = product.get("categoría") 
+        product["rating"] = {"rate": product["rating"]["puntuación"], "count": product["rating"]["cuenta"]}
+        return product
+    
+    except Exception as e:
+        logger.info("The product could not be found")
 
 def modify_product_by_id(id, new_prod):
     try:
@@ -117,8 +131,28 @@ def delete_product_by_id(id):
     except Exception as e:
         logger.info("The product has been deleted succesfully")
         
-        
+
+def modify_product_rating_by_id(id, rating):
     
+    try:
+        #obtiene el producto
+        producto = productos_collection.find_one({'id_producto': id})
+        
+        #obtenemos su rating
+        original_rating = producto["rating"]
+        new_count = original_rating["cuenta"] + 1
+        new_punctuation = original_rating["puntuación"] * original_rating["cuenta"] + rating
+        mid_punctuation = new_punctuation / new_count
+        
+        productos_collection.update_one(
+                    {"id_producto": id},
+                    {"$set": 
+                        {"rating": {"puntuación": mid_punctuation, "cuenta":new_count}}}
+                )
+    
+    except Exception as e:
+        logger.info("The product rate hasn't been modified")
+
 
 #Queries
 
