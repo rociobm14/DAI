@@ -1,6 +1,6 @@
 from ninja_extra import NinjaExtraAPI, api_controller, http_get
 from ninja import Schema
-from .queries import get_products, create_product, get_product_by_id, modify_product_by_id, delete_product_by_id, modify_product_rating_by_id, product_by_id
+from .queries import get_products, create_product, get_product_by_id, modify_product_by_id, delete_product_by_id, modify_product_rating_by_id, product_by_id, search_product_by_name_desc
 
 import logging
 logger = logging.getLogger(__name__)
@@ -100,6 +100,16 @@ def get_product(request, id:int):
     
     except:
         return 404, {'message': 'the product could not be found'}
+    
+    
+#búsqueda de productos por nombre o descripción
+@api.get("/searchproduct", tags=['Search product by name or description'], response={202: list[ProductSchema], 404:ErrorSchema})
+def search_product(request, to_find: str):
+    try:
+        return 202, search_product_by_name_desc(to_find)
+    
+    except:
+        return 404, {'message': 'no products'}
 
 
     
