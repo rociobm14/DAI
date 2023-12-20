@@ -152,6 +152,32 @@ def modify_product_rating_by_id(id, rating):
     
     except Exception as e:
         logger.info("The product rate hasn't been modified")
+        
+        
+def search_product_by_name_desc(to_find):
+    query = {
+        "$or": [
+            {"nombre": {"$regex":f"\\b{to_find}\\b", "$options": "i"}},
+            {"descripción": {"$regex":f"\\b{to_find}\\b", "$options": "i"}}   
+        ]
+    }
+    
+    products = productos_collection.find(query)
+    result = []
+    for p in products:
+        p["id"] = str(p.get("_id"))
+        del p["_id"]
+        p["title"] = p.get("nombre")
+        p["price"] = p.get("precio")
+        p["description"] = p.get("descripción")  
+        p["category"] = p.get("categoría") 
+        p["rating"] = {"rate": p["rating"]["puntuación"], "count": p["rating"]["cuenta"]} 
+        
+        result.append(p)
+        
+    return result
+
+    
 
 
 #Queries
