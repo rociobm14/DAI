@@ -54,6 +54,7 @@ def get_products():
         p["price"] = p.get("precio")
         p["description"] = p.get("descripción")  
         p["category"] = p.get("categoría") 
+        p["image"] = p.get("imágen")
         p["rating"] = {"rate": p["rating"]["puntuación"], "count": p["rating"]["cuenta"]} 
         
         result.append(p)
@@ -87,6 +88,7 @@ def get_product_by_id(id):
         product["price"] = product.get("precio")
         product["description"] = product.get("descripción")  
         product["category"] = product.get("categoría") 
+        product["image"] = product.get("imágen")
         product["rating"] = {"rate": product["rating"]["puntuación"], "count": product["rating"]["cuenta"]}
         return product
     
@@ -170,6 +172,7 @@ def search_product_by_name_desc(to_find):
         p["title"] = p.get("nombre")
         p["price"] = p.get("precio")
         p["description"] = p.get("descripción")  
+        p["image"] = p.get("imágen")
         p["category"] = p.get("categoría") 
         p["rating"] = {"rate": p["rating"]["puntuación"], "count": p["rating"]["cuenta"]} 
         
