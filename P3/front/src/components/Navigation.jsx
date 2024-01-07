@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default function Navigation({cambiado, setProductosF}) {
+export default function Navigation({cambiado, setProductosF, categorias}) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = async (event) => {
@@ -19,7 +19,7 @@ export default function Navigation({cambiado, setProductosF}) {
     return (
         <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
         <Container fluid>
-            <Navbar.Brand href="http://localhost:5173">DAI Commerce</Navbar.Brand>
+            <Navbar.Brand href="http://localhost:5173">Store</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -27,6 +27,15 @@ export default function Navigation({cambiado, setProductosF}) {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
+
+                    <NavDropdown title="Categories" id="navbarScrollingDropdown">
+                    {categorias.map((category, index) => (
+                        <NavDropdown.Item key={index} onClick={(event) => cambiado({ target: { value: category } })}>
+                        {category}
+                        </NavDropdown.Item>
+                    ))}
+                    </NavDropdown>
+
                 </Nav>
                 <Form className="d-flex" onSubmit={handleSearch}>
                     <Form.Control
